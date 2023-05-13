@@ -1,0 +1,13 @@
+credentials:
+  usernames:
+    atoffah:
+      email: atotoffah@gmail.com
+      name: Ato Toffah
+      password: $2b$12$330bG8dby1O8dP8Eg1kSsu2Pvn/I7NDQAJMhFGJrBgh5.nZoplQhi
+cookie:
+  expiry_days: 30
+  key: etd_cookie_key # Must be string
+  name: etd_cookie
+preauthorized:
+  emails:
+    - atotoffah@gmail.com
