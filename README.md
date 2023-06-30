@@ -4,7 +4,7 @@ Web application for detecting electricity theft using a machine learning model
 
 ## Data Source
 
-SGCC Dataset
+Synthetic Data based on SGCC Dataset
 
 ## Framework
 
