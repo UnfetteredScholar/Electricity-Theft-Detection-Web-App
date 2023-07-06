@@ -12,7 +12,7 @@ if  "customer_id" not in st.session_state:
     st.session_state['customer_id'] = None
 
 if "customers_data" not in st.session_state:
-    st.session_state['customers_data'] = read_dataset("data\\ETD_GH_Adjusted_Synthetic.csv")
+    st.session_state['customers_data'] = read_dataset("data\\validation_data_synthetic.csv")
 
 pos1, pos2, pos3 = st.columns([3,2,1])
 with pos3:
