@@ -34,15 +34,18 @@ st.header("Customer Analysis")
 st.subheader(f"Customer ID: {st.session_state['customer_id']}")
 
 
-customers_data = st.session_state.customers_data
-
-try:
-    customer = customers_data.loc[customers_data['CONS_NO']== st.session_state['customer_id']]
-except:
-    e= ""    
+database = st.session_state['customers_data']
+    
+validation_data = database["energy_usage_validation"]
+    
+record = validation_data.find({'CONS_NO':st.session_state['customer_id']})[0]
+customer = pd.DataFrame(data=[record])
+customer = customer.drop(columns='_id')
 
 st.write(customer)
 
+
+#Plot Charts
 customer.set_index = 'CONS_NO'
 customer = customer.drop(columns=['FLAG'])
 
@@ -52,6 +55,8 @@ customer = customer.drop(['CONS_NO'])
 
 st.line_chart(customer)
 st.bar_chart(customer)
+
+
 
 if st.button("Begin Analysis"):
     st.write("Analyzing Customer Consumption Patterns...")
