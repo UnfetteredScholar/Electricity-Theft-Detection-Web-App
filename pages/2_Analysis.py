@@ -3,7 +3,6 @@ import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 import pandas as pd
 import plotly.figure_factory as ff
-from dependencies.functions import read_dataset
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -28,6 +27,9 @@ def AnalyzeRecords(records:list):
     
 if 'authentication_status' not in st.session_state or st.session_state['authentication_status'] != True:
     switch_page('login')
+    
+if "customer_id" not in st.session_state or st.session_state['customer_id'] == None:
+    switch_page("Home")
 
 st.header("Customer Analysis")
 
@@ -40,14 +42,14 @@ validation_data = database["energy_usage_validation"]
     
 record = validation_data.find({'CONS_NO':st.session_state['customer_id']})[0]
 customer = pd.DataFrame(data=[record])
-customer = customer.drop(columns='_id')
+customer = customer.drop(columns=['_id','FLAG'])
 
 st.write(customer)
 
 
 #Plot Charts
 customer.set_index = 'CONS_NO'
-customer = customer.drop(columns=['FLAG'])
+# customer = customer.drop(columns=)
 
 customer = customer.T
 
