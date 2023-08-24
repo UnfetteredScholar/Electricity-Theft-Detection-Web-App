@@ -49,8 +49,9 @@ customer_id = st.text_input("Customer ID")
 
 if customer_id != '':
     if CheckID(customer_id):
-        st.session_state['customer_id'] = customer_id
         if st.button('Submit'):
-            switch_page('analysis')
+            st.session_state['customer_id'] = customer_id
+            st.session_state['current_customer'] = None
+            switch_page('dashboard')
     else:
         st.error('Invalid Customer ID')
