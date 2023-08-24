@@ -15,7 +15,13 @@ def AnalyzeRecords(records:list):
     random_forest_model = joblib.load(open("models/random_forest_model.pkl",'rb'))
     
     knn_pred = knn_model.predict(records)
+    knn_prob = knn_model.predict_proba(records).tolist()[0][1]
     rf_pred = random_forest_model.predict(records)
+    rf_prob = random_forest_model.predict_proba(records).tolist()[0][1]
+    
+    theft_prob = ((knn_prob + rf_prob)/2) * 100
+    # st.write(knn_prob)
+    # st.write(rf_prob)
     
     res = 0
     if knn_pred[0] == rf_pred[0]:
@@ -23,7 +29,7 @@ def AnalyzeRecords(records:list):
     else:
         res = 1
     
-    return res
+    return (res, theft_prob)
     
 if 'authentication_status' not in st.session_state or st.session_state['authentication_status'] != True:
     switch_page('login')
@@ -62,13 +68,16 @@ st.bar_chart(customer)
 
 if st.button("Begin Analysis"):
     st.write("Analyzing Customer Consumption Patterns...")
-    model_prediction = AnalyzeRecords(customer.T.values.tolist())
+    results = AnalyzeRecords(customer.T.values.tolist())
+    model_prediction = results[0]
+    probability = results[1]
     
     st.header("Prediction")
     if model_prediction == 0:
         st.write("Normal Customer")
     else:
         st.write("Suspicious Customer")
+    st.write(f"Probability of theft: {probability:.2f}%")
     
     
     
