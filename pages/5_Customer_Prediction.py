@@ -63,8 +63,10 @@ model_prediction = results[0]
 probability = results[1]
     
 if model_prediction == 0:
-    st.write("## Prediction: :green[Normal Customer]")
+    st.write("## Prediction: :green[Normal Usage]")
+    st.session_state['model_prediction'] = "Normal Usage"
 else:
-    st.write("### Prediction: :red[Suspicious Customer]")
+    st.write("### Prediction: :red[Theft Case]")
+    st.session_state['model_prediction'] = "Theft Case"
 st.write(f"### Probability of theft: {probability:.2f}%")
     

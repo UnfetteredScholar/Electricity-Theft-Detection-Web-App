@@ -21,9 +21,43 @@ else:
     customer = customer.drop(columns=['_id','FLAG'])
     st.session_state['current_customer']= customer
 
-st.header("ENERGY USAGE DATA")
+if "METER_ID" in customer:
+    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'TRANS_CON'])
 
-st.write(f"**Customer ID:** {customer['CONS_NO'][0]}")
+#Plot Charts
+customer.set_index = 'CONS_NO'
+# customer = customer.drop(columns=)
+
+customer = customer.T
+
+customer = customer.drop(['CONS_NO'])
+
+st.header("ENERGY USAGE DATA")
+st.subheader("Previous 3 Months")
+
+st.write(f"**Customer ID:** {st.session_state.customer_id}")
 
 st.write("**Unit: Kilowatt-hour/ kWh**")
-st.write(customer)
+
+
+col1, col2, col3 = st.columns(3)
+
+month1 = customer[0:30]
+month2 = customer[30:60]
+month3 = customer[60:90]
+
+month1.columns = ["Daily Usage/ kWh"]
+month2.columns = ["Daily Usage/ kWh"]
+month3.columns = ["Daily Usage/ kWh"]
+
+with col1:
+    st.subheader("Month 1")
+    st.write(month1)
+    
+with col2:
+    st.subheader("Month 2")
+    st.write(month2)
+    
+with col3:
+    st.subheader("Month 3")
+    st.write(month3)
