@@ -32,7 +32,8 @@ if "METER_ID" in customer:
     st.write(f"**Service Type:** {customer['SERVICE_TYPE'][0]}")
     st.write(f"**Geo Location:** {customer['GEO_LOC'][0]}")
     st.write(f"**District:** {customer['DISTRICT'][0]}")
-    st.write(f"**Transformer Connection:** {customer['TRANS_CON'][0]}")
+    st.write(f"**LV Supply Type:** {customer['SUPPLY_TYPE'][0]}")
+    st.write(f"**Transformer Name:** {customer['TRAFFO_NAME'][0]}")
 
 col1, col2 = st.columns(2)
 

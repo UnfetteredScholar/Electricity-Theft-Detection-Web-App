@@ -13,7 +13,17 @@ if "customer_id" not in st.session_state or st.session_state['customer_id'] == N
     switch_page("Home")
     
 if 'model_prediction' not in st.session_state or st.session_state['model_prediction'] is None:
-    switch_page("Home")
+    switch_page("dashboard")
+    
+if 'submitted' not in st.session_state:
+    st.session_state['submitted'] = False
+    
+    
+left, _, _ = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P1'):
+        switch_page("customer prediction")
     
 st.header("On Site Validation")
 
@@ -29,4 +39,15 @@ st.write(f"**Model Prediction:** {predicted_value}")
 actual_value = st.selectbox("Actual Value", options=["Theft Case", "Normal Usage"], key="avalue")
     
 if st.button(label="Submit"):
-    submitReport(customerID=customer_id, predictedValue=predicted_value, actualValue=actual_value)
+    try:
+        submitReport(customerID=customer_id, predictedValue=predicted_value, actualValue=actual_value)
+    except Exception:
+        st.write("Unable to submit report")
+    else:
+        st.session_state['submitted'] = True
+
+if st.session_state['submitted']:
+    if st.button("Return to Home"):
+        st.session_state['submitted'] = False
+        switch_page("home")
+            

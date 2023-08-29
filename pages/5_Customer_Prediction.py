@@ -47,13 +47,25 @@ else:
 
 
 if "METER_ID" in customer:
-    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'TRANS_CON'])
+    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'SUPPLY_TYPE', 'TRAFFO_NAME'])
 
 customer.set_index = 'CONS_NO'
 
 customer = customer.T
 
 customer = customer.drop(['CONS_NO'])
+
+
+left, _, right = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P1'):
+        switch_page("graph data")
+
+with right:
+    if st. button("Next", key="N1"):
+        switch_page("on site validation")
+        
 
 st.header("Customer Prediction")
 
@@ -66,7 +78,6 @@ if model_prediction == 0:
     st.write("## Prediction: :green[Normal Usage]")
     st.session_state['model_prediction'] = "Normal Usage"
 else:
-    st.write("### Prediction: :red[Theft Case]")
-    st.session_state['model_prediction'] = "Theft Case"
+    st.write("### Prediction: :red[Theft Case Suspected]")
+    st.session_state['model_prediction'] = "Theft Case Suspected"
 st.write(f"### Probability of theft: {probability:.2f}%")
-    

@@ -22,7 +22,19 @@ else:
     st.session_state['current_customer']= customer
 
 if "METER_ID" in customer:
-    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'TRANS_CON'])
+    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'SUPPLY_TYPE', 'TRAFFO_NAME'])
+
+
+left, _, right = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P1'):
+        switch_page("energy data")
+
+with right:
+    if st. button("Next", key="N1"):
+        switch_page("customer prediction")
+        
 
 st.header("ENERGY USAGE PLOT")
 
@@ -34,9 +46,25 @@ customer = customer.T
 
 customer = customer.drop(['CONS_NO'])
 
-st.write("**Kilowatt-hour/ Day**")
-st.line_chart(customer)
+customer['Day'] = range(1, 91)
 
-st.write("**Kilowatt-hour/ Day**")
-st.bar_chart(customer)
+customer.columns = ["Usage/kWh", "Day"]
 
+st.write("**Daily Usage Line Chart**")
+st.line_chart(customer, x='Day', y='Usage/kWh')
+
+st.write("**Daily Usage Bar Chart**")
+st.bar_chart(customer, x='Day', y='Usage/kWh')
+
+
+
+left, _, right = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P2'):
+        switch_page("energy data")
+
+with right:
+    if st. button("Next", key="N2"):
+        switch_page("customer prediction")
+    

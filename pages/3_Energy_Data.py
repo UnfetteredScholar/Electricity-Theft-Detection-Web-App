@@ -22,7 +22,7 @@ else:
     st.session_state['current_customer']= customer
 
 if "METER_ID" in customer:
-    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'TRANS_CON'])
+    customer = customer.drop(columns=['METER_ID', 'SERVICE_TYPE', 'GEO_LOC', 'DISTRICT', 'SUPPLY_TYPE', 'TRAFFO_NAME'])
 
 #Plot Charts
 customer.set_index = 'CONS_NO'
@@ -32,8 +32,19 @@ customer = customer.T
 
 customer = customer.drop(['CONS_NO'])
 
+
+left, _, right = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P1'):
+        switch_page("dashboard")
+
+with right:
+    if st. button("Next", key="N1"):
+        switch_page("graph data")
+
 st.header("ENERGY USAGE DATA")
-st.subheader("Previous 3 Months")
+st.markdown("**Last 3 Months Consumption**")
 
 st.write(f"**Customer ID:** {st.session_state.customer_id}")
 
@@ -61,3 +72,15 @@ with col2:
 with col3:
     st.subheader("Month 3")
     st.write(month3)
+
+
+left, _, right = st.columns([1,5,1])
+
+with left:
+    if st. button("Previous", key='P2'):
+        switch_page("dashboard")
+
+with right:
+    if st. button("Next", key="N2"):
+        switch_page("graph data")
+    
