@@ -36,7 +36,7 @@ with right:
         switch_page("customer prediction")
         
 
-st.header("ENERGY USAGE PLOT")
+st.header("ENERGY CONSUMPTION PLOT")
 
 #Plot Charts
 customer.set_index = 'CONS_NO'
@@ -48,13 +48,13 @@ customer = customer.drop(['CONS_NO'])
 
 customer['Day'] = range(1, 91)
 
-customer.columns = ["Usage/kWh", "Day"]
+customer.columns = ["Consumption/kWh", "Day"]
 
-st.write("**Daily Usage Line Chart**")
-st.line_chart(customer, x='Day', y='Usage/kWh')
+st.write("**Daily Consumption Line Chart**")
+st.line_chart(customer, x='Day', y='Consumption/kWh')
 
-st.write("**Daily Usage Bar Chart**")
-st.bar_chart(customer, x='Day', y='Usage/kWh')
+st.write("**Daily Consumption Bar Chart**")
+st.bar_chart(customer, x='Day', y='Consumption/kWh')
 
 
 

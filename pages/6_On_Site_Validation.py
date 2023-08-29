@@ -47,6 +47,7 @@ if st.button(label="Submit"):
         st.session_state['submitted'] = True
 
 if st.session_state['submitted']:
+    st.write("Report Submitted Successfully")
     if st.button("Return to Home"):
         st.session_state['submitted'] = False
         switch_page("home")

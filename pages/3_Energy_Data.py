@@ -43,7 +43,7 @@ with right:
     if st. button("Next", key="N1"):
         switch_page("graph data")
 
-st.header("ENERGY USAGE DATA")
+st.header("ENERGY CONSUMPTION DATA")
 st.markdown("**Last 3 Months Consumption**")
 
 st.write(f"**Customer ID:** {st.session_state.customer_id}")
