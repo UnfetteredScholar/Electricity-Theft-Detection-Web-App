@@ -57,9 +57,9 @@ month1 = customer[0:30]
 month2 = customer[30:60]
 month3 = customer[60:90]
 
-month1.columns = ["Daily Usage/ kWh"]
-month2.columns = ["Daily Usage/ kWh"]
-month3.columns = ["Daily Usage/ kWh"]
+month1.columns = ["Daily Consumption/ kWh"]
+month2.columns = ["Daily Consumption/ kWh"]
+month3.columns = ["Daily Consumption/ kWh"]
 
 with col1:
     st.subheader("Month 1")
